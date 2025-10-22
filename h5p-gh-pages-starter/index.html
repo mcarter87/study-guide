@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>H5P Accordion on GitHub Pages</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.0/dist/styles/h5p.css">
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin: 24px; }
+      header { margin-bottom: 16px; }
+      .note { background: #f6f8fa; padding: 12px 14px; border-radius: 8px; border: 1px solid #e5e7eb; }
+      #h5p-container { margin-top: 16px; }
+      footer { margin-top: 32px; font-size: 0.9rem; color: #555; }
+      code { background: #f0f0f0; padding: 2px 4px; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>H5P Accordion</h1>
+      <p class="note">
+        This page expects an unzipped H5P package in <code>./h5p/accordion</code> containing
+        <code>h5p.json</code>, <code>content/</code>, and <code>libraries/</code>.
+      </p>
+    </header>
+
+    <div id="h5p-container"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.0/dist/main.bundle.js" charset="UTF-8"></script>
+    <script>
+      // Initialize H5P Standalone pointing to the unzipped H5P folder
+      document.addEventListener('DOMContentLoaded', function () {
+        try {
+          new H5PStandalone.H5P(document.getElementById('h5p-container'), {
+            h5pJsonPath: './h5p/accordion',
+            frameJs: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.0/dist/frame.bundle.js',
+            frameCss: 'https://cdn.jsdelivr.net/npm/h5p-standalone@3.8.0/dist/styles/h5p.css'
+          });
+        } catch (e) {
+          const el = document.createElement('div');
+          el.style.color = '#b91c1c';
+          el.style.marginTop = '12px';
+          el.innerHTML = '<strong>H5P failed to load.</strong> ' +
+                         'Make sure your exported H5P is unzipped to <code>/h5p/accordion</code> and try again.';
+          document.body.appendChild(el);
+          console.error(e);
+        }
+      });
+    </script>
+
+    <footer>
+      <p>
+        Tip: If the H5P doesn’t appear after publishing to GitHub Pages, verify that your repository has a
+        <code>.nojekyll</code> file, and that your <code>h5p.json</code> is at <code>/h5p/accordion/h5p.json</code>.
+      </p>
+    </footer>
+  </body>
+</html>
